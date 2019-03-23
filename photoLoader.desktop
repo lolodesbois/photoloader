@@ -1,0 +1,9 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Type=Application
+Exec='{{execpath}}/photoLoader.sh' {{repository}} %f
+Name=photoLoader.sh
+Comment=Chargeur automatique de photos/video photoLoader.sh (Repository : {{repository}})
+NoDisplay=false
+Terminal=true
