@@ -11,6 +11,9 @@
 #
 # same process is done on video files
 
+# current script directory
+script_folder="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
 # check arg
 if [[ $# -lt 2 ]]
 then 
@@ -23,8 +26,8 @@ fi
 if [[ "$1" == "-i" ]]
 then
 	echo "installation step ... $0 $1 $2 "
-	# image repository 
-	imgRepository=$2 #/home/shared/Images/Prive
+	# image repository (ie : /home/shared/Images/Private) 
+	imgRepository=$2
 
 	if [ ! -e $imgRepository ]
 	then
@@ -40,9 +43,8 @@ then
 	fi 
 
 	replacement="s|{{repository\}}|$2|g"
-	replacement2="s|{{execpath\}}|$0|g"
-	sed $replacement `dirname $0`/photoLoader.desktop | sed $replacement2 >~/.local/share/applications/photoLoader.desktop
-	#sed -i $replacement ./userapp-photoLoader.sh-ABBYHV.desktop>~/.local/share/applications/userapp-photoLoader.sh-ABBYHV.desktop
+	replacement2="s|{{execpath\}}|$script_folder|g"
+	sed $replacement $script_folder/photoLoader.desktop | sed $replacement2 >~/.local/share/applications/photoLoader.desktop
 
 	res=$(grep "x-content/image"  ~/.local/share/applications/mimeapps.list)
 	if [ $? -ne 0 ]
